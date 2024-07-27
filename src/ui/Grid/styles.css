@@ -1,0 +1,23 @@
+.grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 0;
+}
+
+.node-visited {
+    background-color: lightblue;
+    transition: background-color 0.2s;
+}
+
+.node-shortest-path {
+    background-color: yellow;
+    transition: background-color 0.2s;
+}
+
+
+.row {
+    unicode-bidi: isolate;
+}

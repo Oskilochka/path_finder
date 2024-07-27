@@ -1,0 +1,20 @@
+.node {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    outline: 1px solid #87b7cc;
+    background-color: aliceblue;
+}
+
+.node-start {
+    background-color: green;
+}
+
+.node-end {
+    background-color: red;
+}
+
+.node-wall {
+    background-color: #0c3547;
+    outline: 1px solid black;
+}
