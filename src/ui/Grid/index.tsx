@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as d3 from "d3";
-import { NodeType } from "general/types";
-import { createGrid } from "general/utils";
+import { Grid, NodeType } from "general/types";
+import { createGrid, resetGrid } from "general/utils";
 import { dijkstra } from "algo/dijkstra";
 import { getGridWithWallToggled, getNodesInShortestPathOrder } from "helpers";
 import { Node } from "ui";
 import "./styles.css";
+import { Button } from "../Button";
 
 const endNode = { row: 3, col: 3 };
-const startNode = { row: 10, col: 20 };
+const startNode = { row: 15, col:35 };
+const initialGrid = createGrid( 20, 40, startNode, endNode );
 
 export function GridComponent() {
-    const [ grid, setGrid ] = useState<any>( [] );
-
-    useEffect( () => {
-        const initialGrid = createGrid( 20, 30, startNode, endNode );
-        setGrid( initialGrid );
-
-    }, [] );
+    const [ grid, setGrid ] = useState<Grid>( initialGrid );
 
     const handleMouseDown = (row: number, col: number) => {
         const newGrid = getGridWithWallToggled( grid, row, col );
@@ -31,7 +27,6 @@ export function GridComponent() {
         const visitedNodesInOrder = dijkstra( grid, start, end );
         const nodesInShortestPathOrder = getNodesInShortestPathOrder( end );
 
-        debugger
         animateDijkstra( visitedNodesInOrder, nodesInShortestPathOrder );
     };
 
@@ -69,9 +64,19 @@ export function GridComponent() {
         }
     };
 
+    const handleClear = () => {
+        const newGrid = resetGrid(grid);
+        debugger
+        setGrid(newGrid);
+    }
+
     return (
-        <div>
-            <button onClick={ handleVisualizeDijkstra }>Visualize</button>
+        <div className={"wrapper"}>
+            <div className={"actionWrapper"}>
+                <Button onClick={ handleVisualizeDijkstra }>Visualize</Button>
+                <Button onClick={ handleClear }>Clear</Button>
+            </div>
+
             <div className="grid">
                 {
                     grid.map( (row: NodeType[], rowIdx: number) => {

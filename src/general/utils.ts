@@ -39,3 +39,34 @@ export function createGrid(
 
     return nodes;
 }
+
+export function resetGrid(grid: Grid) {
+    const newGrid = grid.map( row => {
+        return row.map( node => {
+            return {
+                ...node,
+                distance: Infinity,
+                isVisited: false,
+                previousNode: null,
+                isWall: false,
+            };
+        } );
+    } );
+
+    // Reset node styles
+    grid.forEach( row => {
+        row.forEach( node => {
+            const element = document.getElementById( `node-${ node.row }-${ node.col }` );
+            if ( element ) {
+                element.className = "node";
+                element.style.background = "";
+                element.style.stroke = "";
+                if ( node.isStart ) element.classList.add( "node-start" );
+                if ( node.isEnd ) element.classList.add( "node-end" );
+                if ( node.isWall ) element.classList.add( "node-wall" );
+            }
+        } );
+    } );
+
+    return newGrid;
+}

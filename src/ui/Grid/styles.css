@@ -5,6 +5,7 @@
     justify-content: center;
     margin-top: 20px;
     font-size: 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3)
 }
 
 .node-visited {
@@ -20,4 +21,17 @@
 
 .row {
     unicode-bidi: isolate;
+}
+
+.wrapper {
+    width: fit-content;
+    margin: 0 auto;
+    height: 100vh;
+
+    padding: 20px 0;
+}
+
+.actionWrapper {
+    display: flex;
+    gap: 16px;
 }
